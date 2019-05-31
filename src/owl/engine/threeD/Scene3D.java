@@ -22,7 +22,7 @@ public class Scene3D extends JPanel implements Scene {
         setFocusable(true);
 
         this.width = width;
-        this.height =height;
+        this.height = height;
 
         originOffset = new Point2D.Double(width / 2, height / 2);
     }
@@ -33,7 +33,7 @@ public class Scene3D extends JPanel implements Scene {
         setFocusable(true);
 
         this.width = width;
-        this.height =height;
+        this.height = height;
 
         originOffset = new Point2D.Double(width / 2, height / 2);
         cameraDistance = initCameraDistance;
@@ -47,30 +47,22 @@ public class Scene3D extends JPanel implements Scene {
         this.vertices.addAll(vertices);
     }
 
-    private void drawPoint(Graphics2D g, Point3D point) {
-        Point2D projected = point.project2D(cameraDistance);
-
-        System.out.printf(point.toString() + " -> [x: %.1f y: %.1f]%n", projected.getX(), projected.getY());
-
-        g.drawOval((int) projected.getX(), (int) projected.getY(), 5, 5);
-
-        String pointInfo = point.toString();
-
-        g.drawString(pointInfo, (int) projected.getX() - g.getFontMetrics().stringWidth(pointInfo)/2, (int) projected.getY() - 3);
+    List<Point3D> getVertices() {
+        return vertices;
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, getWidth(), getHeight());
-
-        g2.setColor(Color.BLACK);
-        for (Point3D vertex : vertices) {
-            drawPoint(g2, vertex);
-        }
-    }
+//    public void paint(Graphics g) {
+//        super.paint(g);
+//        Graphics2D g2 = (Graphics2D) g;
+//
+//        g2.setColor(Color.WHITE);
+//        g2.fillRect(0, 0, getWidth(), getHeight());
+//
+//        g2.setColor(Color.BLACK);
+//        for (Point3D vertex : vertices) {
+//            drawPoint(g2, vertex);
+//        }
+//    }
 
     public void startRender() {
         JFrame display = new JFrame();

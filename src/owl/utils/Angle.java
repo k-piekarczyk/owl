@@ -20,6 +20,11 @@ public class Angle {
     }
 
     public double getRadians() {
-        return degree / 180;
+        return Math.toRadians(degree);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%.3f degrees", degree);
     }
 }
