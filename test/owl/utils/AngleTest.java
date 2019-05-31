@@ -32,18 +32,4 @@ class AngleTest {
 
         assertEquals(1, angle.getRadians());
     }
-
-    @Test
-    void should_normalize_positive_values_correctly() {
-        Angle angle = new Angle(721);
-
-        assertEquals(1, angle.getDegrees());
-    }
-
-    @Test
-    void should_normalize_negative_values_correctly() {
-        Angle angle = new Angle(-25);
-
-        assertEquals(335, angle.getDegrees());
-    }
 }

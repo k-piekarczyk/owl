@@ -9,19 +9,6 @@ public class Angle {
 
     public Angle(double degree) {
         this.degree = degree;
-        normalize();
-    }
-
-    private void normalize() {
-        if (degree >= 360) {
-            double x = Math.floor(degree / 360.0);
-            degree = degree - 360.0 * x;
-        } else if (degree < 0) {
-            double abs = Math.abs(degree);
-            double x = Math.floor(abs / 360.0);
-
-            degree = 360 - abs * (1 - x);
-        }
     }
 
     public double getDegrees() {
@@ -30,7 +17,6 @@ public class Angle {
 
     public void setDegree(double degree) {
         this.degree = degree;
-        normalize();
     }
 
     public double getRadians() {

@@ -1,6 +1,6 @@
-package owl.engine.e3D;
+package owl.engine.threeD;
 
-import owl.engine.e3D.Point3D;
+import owl.engine.common.Scene;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stage3D extends JPanel {
+public class Scene3D extends JPanel implements Scene {
     private int width;
     private int height;
     private double cameraDistance = 100;
@@ -16,7 +16,7 @@ public class Stage3D extends JPanel {
 
     private List<Point3D> vertices = new ArrayList<>();
 
-    public Stage3D(int width, int height) {
+    public Scene3D(int width, int height) {
         setSize(width, height);
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
@@ -27,7 +27,7 @@ public class Stage3D extends JPanel {
         originOffset = new Point2D.Double(width / 2, height / 2);
     }
 
-    public Stage3D(int width, int height, double initCameraDistance) {
+    public Scene3D(int width, int height, double initCameraDistance) {
         setSize(width, height);
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
@@ -74,7 +74,7 @@ public class Stage3D extends JPanel {
 
     public void startRender() {
         JFrame display = new JFrame();
-        display.setTitle("Stage3D " + this.hashCode());
+        display.setTitle("Scene3D " + this.hashCode());
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         display.setLocationRelativeTo(null);
         display.setResizable(false);
