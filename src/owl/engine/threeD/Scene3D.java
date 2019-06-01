@@ -8,36 +8,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scene3D extends JPanel implements Scene {
-    private int width;
-    private int height;
-    private double cameraDistance = 100;
-    private Point2D originOffset;
+public class Scene3D implements Scene {
 
     private List<Point3D> vertices = new ArrayList<>();
-
-    public Scene3D(int width, int height) {
-        setSize(width, height);
-        setPreferredSize(new Dimension(width, height));
-        setFocusable(true);
-
-        this.width = width;
-        this.height = height;
-
-        originOffset = new Point2D.Double(width / 2, height / 2);
-    }
-
-    public Scene3D(int width, int height, double initCameraDistance) {
-        setSize(width, height);
-        setPreferredSize(new Dimension(width, height));
-        setFocusable(true);
-
-        this.width = width;
-        this.height = height;
-
-        originOffset = new Point2D.Double(width / 2, height / 2);
-        cameraDistance = initCameraDistance;
-    }
+    private List<Camera3D> cameras = new ArrayList<>();
 
     public void addVertex(Point3D vertex) {
         vertices.add(vertex);
@@ -47,34 +21,18 @@ public class Scene3D extends JPanel implements Scene {
         this.vertices.addAll(vertices);
     }
 
+    public void addCamera(Camera3D camera) {
+        camera.setScene(this);
+        cameras.add(camera);
+    }
+
     List<Point3D> getVertices() {
         return vertices;
     }
 
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        Graphics2D g2 = (Graphics2D) g;
-//
-//        g2.setColor(Color.WHITE);
-//        g2.fillRect(0, 0, getWidth(), getHeight());
-//
-//        g2.setColor(Color.BLACK);
-//        for (Point3D vertex : vertices) {
-//            drawPoint(g2, vertex);
-//        }
-//    }
-
-    public void startRender() {
-        JFrame display = new JFrame();
-        display.setTitle("Scene3D " + this.hashCode());
-        display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        display.setLocationRelativeTo(null);
-        display.setResizable(false);
-
-        display.add(this);
-        display.pack();
-        display.setVisible(true);
-
-        repaint();
+    public void start() {
+        for (Camera3D camera : cameras) {
+            camera.start();
+        }
     }
 }
